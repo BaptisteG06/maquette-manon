@@ -423,7 +423,7 @@ html:not(.js) .coupe .t{stroke-dashoffset:0}html:not(.js) .coupe .lab text,html:
     out.push(...box(10,x1,1,9,0,3.2,'b'),...hip(10,x1,1,9,3.2,1.6,'b'));
     out.push(...box(17.6,x1,1,9,0,3.2,'ext').filter(l=>l[0][0]>17.9&&l[1][0]>17.9));
     out.push(...rect(bx,bx+bw,1,0,2.4,'baie'),...rect(x1-2,x1-.9,1,.9,2.2,'b'));
-    if(s.g>0) out.push(...box(-6,0,2,9,0,3,'g'),...rect(-5.2,-.8,2,0,2.4,'g'),[[-6,2,3.25],[0,2,3.25],'g','toit']);
+    if(s.g>0) out.push(...box(-6,0,2,9,0,3,'g'),...rect(-5.2,-.8,2,0,2.4,'g'));
     // terrasse et piscine au sol
     out.push([[10,1,0],[10,-3,0],'t','sol'],[[10,-3,0],[x1,-3,0],'t','sol'],[[x1,-3,0],[x1,1,0],'t','sol']);
     const px0=11.5,px1=17.5; out.push([[px0,-5,0],[px1,-5,0],'p','sol'],[[px1,-5,0],[px1,-8.5,0],'p','sol'],[[px1,-8.5,0],[px0,-8.5,0],'p','sol'],[[px0,-8.5,0],[px0,-5,0],'p','sol']);
