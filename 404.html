@@ -141,15 +141,15 @@ p{text-wrap:pretty}
 .coupe-scroll{height:200vh;position:relative}
 .coupe-stick{position:sticky;top:max(80px,calc(50svh - 290px))}
 .coupe{width:100%;height:auto;display:block;color:var(--txt);overflow:visible}
-.coupe .t{fill:none;stroke:rgba(22,53,59,.82);stroke-width:1.6;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--k,0))}
+.coupe .t{fill:none;stroke:rgba(22,53,59,.82);stroke-width:1.6;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--k,0));transition:stroke-dashoffset .35s linear}
 .coupe .sol{stroke:rgba(22,53,59,.4)}
 .coupe .a,.coupe .f{stroke:var(--kick)}
 .coupe .iso{stroke-dasharray:.012 .01;opacity:var(--k,0);stroke-dashoffset:0}
 .coupe .res{stroke:#b5835a}
 .coupe .l{stroke:rgba(19,106,120,.5);stroke-width:1}
 .coupe text{fill:var(--txt);font:400 14px var(--sans);letter-spacing:.18em}
-.coupe .lab text{opacity:var(--k,0);transition:opacity .3s}
-.coupe .niv{opacity:var(--k,0)}.coupe .niv path{fill:none;stroke:rgba(22,53,59,.6)}.coupe .niv text{fill:var(--mut);font-size:13px;letter-spacing:.06em}
+.coupe .lab text{opacity:var(--k,0);transition:opacity .35s}
+.coupe .niv{opacity:var(--k,0);transition:opacity .35s}.coupe .niv path{fill:none;stroke:rgba(22,53,59,.6)}.coupe .niv text{fill:var(--mut);font-size:13px;letter-spacing:.06em}
 .coupe-f figcaption{margin-top:20px;font-size:15px;color:var(--mut)}.coupe-f figcaption b{display:block;font-size:23px;color:var(--txt)}
 .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,64px);margin-top:clamp(64px,8vw,110px)}
 .cols .n{display:block;font:200 46px/1 var(--sans);color:var(--kick);margin-bottom:18px}
@@ -256,8 +256,9 @@ footer{background:var(--panel);border-top:1px solid var(--ln);padding-block:44px
  .grille{grid-template-columns:repeat(2,1fr)}
  .cols,.ou{grid-template-columns:1fr}.cols{gap:44px}
  .prix-img{position:static}.prix-img img{aspect-ratio:3/2}
- .coupe .lab text{display:none}
- .coupe-scroll{height:150vh}
+ .coupe .lab{display:none}
+ .coupe-scroll{height:auto}.coupe-stick{position:static}
+ .coupe{margin-inline:-6%;width:112%}
  .foot{grid-template-columns:1fr;gap:20px}
 }
 @media (max-width:600px){

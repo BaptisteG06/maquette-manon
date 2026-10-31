@@ -152,15 +152,15 @@ p{text-wrap:pretty}
 .coupe-scroll{height:200vh;position:relative}
 .coupe-stick{position:sticky;top:max(80px,calc(50svh - 290px))}
 .coupe{width:100%;height:auto;display:block;color:var(--txt);overflow:visible}
-.coupe .t{fill:none;stroke:rgba(22,53,59,.82);stroke-width:1.6;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--k,0))}
+.coupe .t{fill:none;stroke:rgba(22,53,59,.82);stroke-width:1.6;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--k,0));transition:stroke-dashoffset .35s linear}
 .coupe .sol{stroke:rgba(22,53,59,.4)}
 .coupe .a,.coupe .f{stroke:var(--kick)}
 .coupe .iso{stroke-dasharray:.012 .01;opacity:var(--k,0);stroke-dashoffset:0}
 .coupe .res{stroke:#b5835a}
 .coupe .l{stroke:rgba(19,106,120,.5);stroke-width:1}
 .coupe text{fill:var(--txt);font:400 14px var(--sans);letter-spacing:.18em}
-.coupe .lab text{opacity:var(--k,0);transition:opacity .3s}
-.coupe .niv{opacity:var(--k,0)}.coupe .niv path{fill:none;stroke:rgba(22,53,59,.6)}.coupe .niv text{fill:var(--mut);font-size:13px;letter-spacing:.06em}
+.coupe .lab text{opacity:var(--k,0);transition:opacity .35s}
+.coupe .niv{opacity:var(--k,0);transition:opacity .35s}.coupe .niv path{fill:none;stroke:rgba(22,53,59,.6)}.coupe .niv text{fill:var(--mut);font-size:13px;letter-spacing:.06em}
 .coupe-f figcaption{margin-top:20px;font-size:15px;color:var(--mut)}.coupe-f figcaption b{display:block;font-size:23px;color:var(--txt)}
 .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,64px);margin-top:clamp(64px,8vw,110px)}
 .cols .n{display:block;font:200 46px/1 var(--sans);color:var(--kick);margin-bottom:18px}
@@ -267,8 +267,9 @@ footer{background:var(--panel);border-top:1px solid var(--ln);padding-block:44px
  .grille{grid-template-columns:repeat(2,1fr)}
  .cols,.ou{grid-template-columns:1fr}.cols{gap:44px}
  .prix-img{position:static}.prix-img img{aspect-ratio:3/2}
- .coupe .lab text{display:none}
- .coupe-scroll{height:150vh}
+ .coupe .lab{display:none}
+ .coupe-scroll{height:auto}.coupe-stick{position:static}
+ .coupe{margin-inline:-6%;width:112%}
  .foot{grid-template-columns:1fr;gap:20px}
 }
 @media (max-width:600px){
@@ -380,7 +381,7 @@ html:not(.js) .coupe .t{stroke-dashoffset:0}html:not(.js) .coupe .lab text,html:
   addEventListener('scroll',lazy,{once:true,passive:true}); addEventListener('load',()=>setTimeout(lazy,3500));
   // coupe de principe : chaque trait se dessine à son tour pendant le défilement
   const cs=d.querySelector('.coupe-scroll'), cps=cs?[...cs.querySelectorAll('[style*="--at"]')]:[];
-  const coupeProg=()=>{ if(!cs) return; const r=cs.getBoundingClientRect(), run=cs.offsetHeight-innerHeight*.7; const p=reduce?1:cl((innerHeight*.75-r.top)/Math.max(1,run));
+  const coupeProg=()=>{ if(!cs) return; const r=(innerWidth<900?cs.querySelector('svg'):cs).getBoundingClientRect(); const p=reduce?1:(innerWidth<900?cl((innerHeight*.95-r.top)/(innerHeight*.6)):cl((innerHeight*.75-r.top)/Math.max(1,cs.offsetHeight-innerHeight*.7)));
     cps.forEach(e=>{ const at=parseFloat(e.style.getPropertyValue('--at')); e.style.setProperty('--k',cl((p*1.05-at)/.12).toFixed(3)); }); };
   let raf=0; addEventListener('scroll',()=>{ if(!raf) raf=requestAnimationFrame(()=>{raf=0; heroProg(); coupeProg();}); },{passive:true});
   addEventListener('resize',()=>{heroProg();coupeProg()}); heroProg(); coupeProg();
@@ -429,7 +430,7 @@ html:not(.js) .coupe .t{stroke-dashoffset:0}html:not(.js) .coupe .lab text,html:
     return {lines:out,x1};
   }
   function cloisons(x1){return [[[4,0],[4,9]],[[6.5,0],[6.5,9]],[[0,5],[4,5]],[[6.5,5],[10,5]],[[10,1],[10,9]],[[x1-5,5.5],[x1,5.5]],[[x1-5,5.5],[x1-5,9]]];}
-  function pieces(x1){return [[L.cuisine,2,2.5],[L.ch+' 2',2,7],[L.entree,5.25,4.5],[L.suite,8.25,2.5],[L.bain,8.25,7],[L.sejour,(10+x1-5)/2+.6,4.2],[L.ch+' 3',x1-2.5,7.3],[L.garage,-3,5.5]];}
+  function pieces(x1){return [[L.cuisine,2,2.5,4],[L.ch+' 2',2,7,4],[L.entree,5.25,4.5,2.5],[L.suite,8.25,2.5,3.5],[L.bain,8.25,7,3.5],[L.sejour,(10+x1-5)/2+.6,4.2,6],[L.ch+' 3',x1-2.5,7.3,5],[L.garage,-3,5.5,6]];}
 
   function state(p){
     const k=[0,.2,.4,.6,.8,1]; // bornes des 5 temps
@@ -465,7 +466,7 @@ html:not(.js) .coupe .t{stroke-dashoffset:0}html:not(.js) .coupe .lab text,html:
       for(const [u,v] of cloisons(m.x1)){const A=S(u[0],u[1],0),B=S(v[0],v[1],0); ctx.beginPath(); ctx.moveTo(...A); ctx.lineTo(...B); ctx.stroke();}
       ctx.fillStyle=`rgba(22,53,59,${.9*s.plan})`; ctx.textAlign='center'; ctx.textBaseline='middle';
       const fs=Math.max(10,Math.min(14,sc*.62)); ctx.font=`400 ${fs}px ${font}`;
-      for(const [n,x,y] of pieces(m.x1)){ if(n===L.garage&&s.g<.5) continue; const v=S(x,y,0); ctx.fillText(n.toUpperCase(),v[0],v[1]); }
+      for(const [n,x,y,w] of pieces(m.x1)){ if(n===L.garage&&s.g<.5) continue; const v=S(x,y,0), t=n.toUpperCase(); let f=fs; ctx.font=`400 ${f}px ${font}`; const max=w*sc*.78, mw=ctx.measureText(t).width; if(mw>max){ f=Math.max(7,f*max/mw); ctx.font=`400 ${f}px ${font}`; } ctx.fillText(t,v[0],v[1]); }
       ctx.fillStyle=`rgba(24,124,141,${s.plan})`; ctx.font=`400 ${fs+2}px ${font}`; const v=S(7,-11.5,0); ctx.fillText(L.total.toUpperCase(),v[0],v[1]); }
     // cotes des retouches
     const tag=(txt,pt,al)=>{ if(al<.02) return; const v=S(...pt); ctx.font=`400 ${Math.max(11,Math.min(14,W/70))}px ${font}`; ctx.textAlign='center'; ctx.fillStyle=`rgba(24,124,141,${al})`; ctx.fillText(txt.toUpperCase(),v[0],v[1]); };
