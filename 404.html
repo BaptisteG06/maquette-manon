@@ -181,7 +181,7 @@ p{text-wrap:pretty}
 .carte .cote{fill:none;stroke:var(--kick);stroke-width:1.6;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.4s var(--ease)}
 .carte .ile{fill:none;stroke:rgba(19,106,120,.6);vector-effect:non-scaling-stroke}
 .carte .mer-t{fill:rgba(19,106,120,.75);font:400 15px var(--sans);letter-spacing:.5em;text-anchor:middle}
-.carte .pt circle{fill:var(--txt)}.carte .pt text{fill:var(--mut);font:400 14px var(--sans)}
+.carte .ag-m{display:none}.carte .pt circle{fill:var(--txt)}.carte .lead{stroke:rgba(22,53,59,.45);stroke-width:1;fill:none}.carte .pt text{fill:var(--mut);font:400 14px var(--sans)}
 .carte .ag circle{fill:var(--kick)}.carte .ag .halo{fill:none;stroke:var(--kick);opacity:.6}.carte .ag text{fill:var(--kick);font:500 13.5px var(--sans);letter-spacing:.16em}
 .carte .pt,.carte .ag{opacity:0;transition:opacity .6s calc(var(--i) * 45ms + .6s)}
 .carte-f.in .cote,:not(.js) .carte .cote{stroke-dashoffset:0}.carte-f.in .pt,.carte-f.in .ag{opacity:1}
@@ -276,7 +276,7 @@ footer{background:var(--panel);border-top:1px solid var(--ln);padding-block:44px
  .serif-xl{font-size:clamp(36px,10vw,46px)}
  .stat b{font-size:56px}
  .communes{font-size:15px}
- .carte .pt text{display:none}.carte .ag text{font-size:30px}.carte .pt circle{r:6}.carte .mer-t{font-size:24px}
+ .carte .pt text,.carte .lead,.carte .ag-d{display:none}.carte .ag-m{display:inline}.carte .ag .lead.ag-m{display:inline;stroke:var(--kick);stroke-width:2}.carte .ag text{font-size:28px}.carte .pt circle{r:6}.carte .mer-t{font-size:24px}
  .e-col{padding-top:82px}
  .e-col h2{font-size:24px;letter-spacing:.1em;margin-bottom:10px}
  .e-col .sub{font-size:20px}
