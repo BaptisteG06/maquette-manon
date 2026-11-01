@@ -67,6 +67,8 @@ p{text-wrap:pretty}
 .hero h1{font-weight:400;font-size:clamp(36px,5.2vw,74px);letter-spacing:.13em;line-height:1.15;margin-bottom:26px}
 .hero .lede{max-width:500px;font-size:18px;line-height:1.6;margin-bottom:34px;font-weight:450}
 .hero .btn{color:#fff;border-color:rgba(255,255,255,.85);text-shadow:none}.hero .btn:hover{background:#fff;color:var(--txt);border-color:#fff}
+.hero-act{display:flex;flex-wrap:wrap;gap:14px}.hero .btn.hero-cta{background:#fff;color:var(--txt);border-color:#fff}.hero .btn.hero-cta:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
+@media(max-width:600px){.hero-act{flex-direction:column;align-items:stretch;gap:10px;max-width:340px;margin-bottom:18px}.hero-act .btn{min-height:48px;padding:12px 20px}}
 .hero .cap{margin-top:30px;font:500 12.5px/1 var(--sans);letter-spacing:.3em}
 .dots{position:absolute;inset:auto 0 0;display:flex;justify-content:flex-end;gap:6px;padding-bottom:clamp(64px,10vh,110px)}
 .dot{width:44px;height:44px;background:none;border:0;cursor:pointer;position:relative}
